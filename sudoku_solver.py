@@ -62,14 +62,6 @@ class Sudoku_Solver:
             print('')
 
 
-    # def is_sudoku_completed(self):
-    #     #  function to tell when to stop searching for solutions
-    #     for i in range(0, 9):
-    #         for j in range(0, 9):
-    #             if self.sudoku_grid[i][j] == 0:
-    #                 return False
-    #     return True
-
 
     def check_if_number_works_at_position(self, number, line, column):
         # check if number is duplicated in both line and column

@@ -42,7 +42,11 @@ class Sudoku_Solver:
             for j in range(0, 9):
                 if self.sudoku_grid[i][j] > 0:
                     count += 1
-        logdebug("SUDOKU SOLVER", "Amount numbers found in sudoku = " + str(count), False)
+        # logdebug("SUDOKU SOLVER", "Amount numbers found in sudoku = " + str(count), False)
+        if count == 81:
+            logdebug("SUDOKU SOLVER", "SODUKU SOLUTION FOUND! Number of tries = "+str(self.tries), False)
+            self.print_sudoku_grid()
+        return count
 
 
     def print_sudoku_grid(self):
@@ -58,13 +62,13 @@ class Sudoku_Solver:
             print('')
 
 
-    def is_sudoku_completed(self):
-        #  function to tell when to stop searching for solutions
-        for i in range(0, 9):
-            for j in range(0, 9):
-                if self.sudoku_grid[i][j] == 0:
-                    return False
-        return True
+    # def is_sudoku_completed(self):
+    #     #  function to tell when to stop searching for solutions
+    #     for i in range(0, 9):
+    #         for j in range(0, 9):
+    #             if self.sudoku_grid[i][j] == 0:
+    #                 return False
+    #     return True
 
 
     def check_if_number_works_at_position(self, number, line, column):
@@ -86,18 +90,18 @@ class Sudoku_Solver:
                 if self.sudoku_grid[i][j] == 0:
                     for t in range(1, 10):
                         if self.check_if_number_works_at_position(t, i, j):
+                            self.tries += 1
                             self.sudoku_grid[i][j] = t
                             # check if this number solved sudoku
-                            if self.is_sudoku_completed():
+                            if self.count_numbers_in_sudoku_grid() == 81:
                                 # sudoku is resolved (hopefully!), print it and get out
-                                logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" SODUKU SOLUTION FOUND!", False)
-                                self.print_sudoku_grid()
                                 return True
 
                             # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
-                            self.tries += 1
-                            if self.tries % 1000 == 0:
+                            if self.tries % 20000 == 0:
                                 logdebug("SUDOKU SOLVER", "# of tries = "+str(self.tries), False)
+                                if self.tries % 100000 == 0:
+                                    self.print_sudoku_grid()
 
                             if self.solve_sudoku(iteration_level+1):
                                 # stop sudoku solving because an inner recursion has found a solution
@@ -105,9 +109,11 @@ class Sudoku_Solver:
                             else:
                                 self.sudoku_grid[i][j] = 0
 
-                        # else:
+                        else:
                             # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
                             # self.sudoku_grid[i][j] = 0
+                            if t == 9:
+                                return False
 
         # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
         # tell previous recursion that current has failed and it must move to next number

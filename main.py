@@ -3,9 +3,21 @@ from common import *
 from sys import exit
 
 
-# random sudoku
+# sudoku 1 - easy
+# sudoku_grid = [
+#     [2, 0, 0, 5, 0, 7, 0, 0, 0], 
+#     [0, 0, 6, 2, 3, 0, 1, 0, 0], 
+#     [7, 5, 3, 6, 0, 0, 0, 4, 8],
+#     [0, 0, 0, 8, 0, 0, 4, 5, 1], 
+#     [3, 0, 0, 0, 6, 0, 9, 0, 2], 
+#     [0, 8, 5, 0, 2, 0, 0, 3, 0],
+#     [5, 0, 1, 0, 0, 9, 6, 0, 0], 
+#     [0, 4, 9, 7, 0, 0, 0, 0, 3], 
+#     [8, 2, 7, 0, 0, 6, 0, 9, 0]]
+
+# sudoku 1 solution - easy
 sudoku_grid = [
-    [2, 0, 0, 5, 0, 7, 0, 0, 0], 
+    [2, 1, 8, 5, 0, 7, 0, 0, 0], 
     [0, 0, 6, 2, 3, 0, 1, 0, 0], 
     [7, 5, 3, 6, 0, 0, 0, 4, 8],
     [0, 0, 0, 8, 0, 0, 4, 5, 1], 
@@ -13,7 +25,7 @@ sudoku_grid = [
     [0, 8, 5, 0, 2, 0, 0, 3, 0],
     [5, 0, 1, 0, 0, 9, 6, 0, 0], 
     [0, 4, 9, 7, 0, 0, 0, 0, 3], 
-    [8, 2, 7, 0, 0, 6, 0, 9, 0]]
+    [8, 2, 7, 0, 0, 6, 0, 9, 4]]
 
 # easy sudoku
 # sudoku_grid = [
@@ -55,7 +67,11 @@ else:
     exit(0)
 
 ss.print_sudoku_grid()
-ss.count_numbers_in_sudoku_grid()
+c = ss.count_numbers_in_sudoku_grid()
+logdebug("MAIN", "Amount numbers found in sudoku = " + str(c), False)
 
-logdebug("MAIN", "Starting to solve Sudoku!", False)
-ss.solve_sudoku(1)
+if c < 81:
+    logdebug("MAIN", "Starting to solve Sudoku!", False)
+    ss.solve_sudoku(1)
+
+print("Sudoku solver has finished!")

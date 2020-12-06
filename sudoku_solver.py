@@ -10,27 +10,25 @@ class Sudoku_Solver:
         logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
         for n in range(1, 10):
             for i in range(0, 9):
-                nfound = False
+                nfoundhori = False
+                nfoundvert = False
                 for j in range(0, 9):
-                    logdebug("SUDOKU SOLVER", "checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
-                    if n in sudoku_grid[i]:
-                        if nfound:
+                    logdebug("SUDOKU SOLVER", "Horizontally checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
+                    if sudoku_grid[i][j] == n:
+                        if nfoundhori:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
                             return False
                         else:
-                            nfound = True
+                            nfoundhori = True
 
-            logdebug("SUDOKU SOLVER", "Starting vertical check...", False)
-            for i in range(0, 9):
-                nfound = False
-                for j in range(0, 9):
-                    logdebug("SUDOKU SOLVER", "checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
+                    logdebug("SUDOKU SOLVER", "Vertically checking number = "+str(n)+" at position "+str(j)+","+str(i)+" = "+str(sudoku_grid[j][i]), False)
                     if sudoku_grid[j][i] == n:
-                        if nfound:
+                        if nfoundvert:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
                             return False
                         else:
-                            nfound = True
+                            nfoundvert = True
+
         return True
 
 

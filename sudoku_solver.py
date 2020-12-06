@@ -2,12 +2,15 @@ from common import *
 
 class Sudoku_Solver:
     def __init__(self, sudoku_grid):
+        # class contructor
         logdebug("SUDOKU_SOLVER", "Storing sudoku grid", False)
         self.sudoku_grid = sudoku_grid
         self.tries = 0
 
 
     def is_sudoku_valid(self):
+        # check if current sudoku grid configuration is valid or not
+        # uses full grid scans for all numbers - very slow
         # logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
         for n in range(1, 10):
             for i in range(0, 9):
@@ -29,20 +32,21 @@ class Sudoku_Solver:
                             return False
                         else:
                             nfoundvert = True
-
         return True
 
 
     def analyze_sudoku(self):
+        # function to return how many numbers we have in sudoku
         count = 0
         for i in range(0, 9):
             for j in range(0, 9):
                 if self.sudoku_grid[i][j] > 0:
                     count += 1
-        logdebug("SUDOKU SOLVER", "Initial numbers found in sudoku = " + str(count), False)
+        logdebug("SUDOKU SOLVER", "Amount numbers found in sudoku = " + str(count), False)
 
 
     def print_sudoku_grid(self):
+        # function to print sudoku grid
         logdebug("SUDOKU SOLVER", "Printing sudoku grid...", False)
         for i in range(0, 9):
             if (i == 3 or i == 6):
@@ -55,7 +59,7 @@ class Sudoku_Solver:
 
 
     def is_sudoku_completed(self):
-        # small function to tell when to stop for solutions
+        #  function to tell when to stop searching for solutions
         for i in range(0, 9):
             for j in range(0, 9):
                 if self.sudoku_grid[i][j] == 0:
@@ -64,6 +68,7 @@ class Sudoku_Solver:
 
 
     def solve_sudoku(self, iteration_level):
+        # main function that tries to solve sudoku
         for i in range(0, 9):
             for j in range(0, 9):
                 if self.sudoku_grid[i][j] == 0:
@@ -90,5 +95,5 @@ class Sudoku_Solver:
                             self.sudoku_grid[i][j] = 0
 
         # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
-        # tell previous recursion that current has failed
+        # tell previous recursion that current has failed and it must move to next number
         return False

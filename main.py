@@ -41,7 +41,7 @@ sudoku_grid = [
 
 
 # MAIN CODE STARTS HERE
-print("Welcome to solve Sudoku! Starting up!")
+print("Welcome to solve Sudoku! Starting things up!")
 
 logdebug("MAIN", "Instanciating Sudoku_Solver class...", False)
 ss = Sudoku_Solver(sudoku_grid)

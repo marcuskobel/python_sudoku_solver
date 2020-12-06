@@ -50,12 +50,12 @@ logdebug("MAIN", "Checking if initial sudoku grid is valid: ", True)
 
 if ss.is_sudoku_valid():
     print('VALID!')
-    ss.analyze_sudoku()
 else:
     print("INVALID! Can't continue solving sudoku.")
     exit(0)
 
 ss.print_sudoku_grid()
+ss.count_numbers_in_sudoku_grid()
 
 logdebug("MAIN", "Starting to solve Sudoku!", False)
 ss.solve_sudoku(1)

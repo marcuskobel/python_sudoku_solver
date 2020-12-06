@@ -35,7 +35,7 @@ class Sudoku_Solver:
         return True
 
 
-    def analyze_sudoku(self):
+    def count_numbers_in_sudoku_grid(self):
         # function to return how many numbers we have in sudoku
         count = 0
         for i in range(0, 9):

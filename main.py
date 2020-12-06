@@ -55,4 +55,6 @@ else:
     exit(0)
 
 ss.print_sudoku_grid()
-# ss.solve_sudoku(sudoku_grid, 1)
+
+logdebug("MAIN", "Starting to solve Sudoku!", False)
+ss.solve_sudoku(1)

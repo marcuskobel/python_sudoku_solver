@@ -4,6 +4,7 @@ class Sudoku_Solver:
     def __init__(self, sudoku_grid):
         logdebug("SUDOKU_SOLVER", "Storing sudoku grid", False)
         self.sudoku_grid = sudoku_grid
+        self.tries = 0
 
 
     def is_sudoku_valid(self):
@@ -76,7 +77,10 @@ class Sudoku_Solver:
                                 return True
 
                             # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
-                            # il = iteration_level+1
+                            self.tries += 1
+                            if self.tries % 1000 == 0:
+                                logdebug("SUDOKU SOLVER", "# of tries = "+str(self.tries), False)
+
                             if self.solve_sudoku(iteration_level+1):
                                 # stop sudoku solving because an inner recursion has found a solution
                                 return True

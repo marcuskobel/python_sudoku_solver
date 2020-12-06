@@ -111,10 +111,10 @@ class Sudoku_Solver:
 
                         else:
                             # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
-                            # self.sudoku_grid[i][j] = 0
+                            self.sudoku_grid[i][j] = 0
                             if t == 9:
                                 return False
 
         # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
         # tell previous recursion that current has failed and it must move to next number
-        return False
+        # return False

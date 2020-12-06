@@ -83,38 +83,51 @@ class Sudoku_Solver:
         return True
 
 
-    def solve_sudoku(self, iteration_level):
+    def solve_sudoku(self, iteration_level, lin, col):
         # main function that tries to solve sudoku
-        for i in range(0, 9):
-            for j in range(0, 9):
-                if self.sudoku_grid[i][j] == 0:
-                    for t in range(1, 10):
-                        if self.check_if_number_works_at_position(t, i, j):
-                            self.tries += 1
-                            self.sudoku_grid[i][j] = t
-                            # check if this number solved sudoku
-                            if self.count_numbers_in_sudoku_grid() == 81:
-                                # sudoku is resolved (hopefully!), print it and get out
-                                return True
+        if col == 8 and lin == 8:
+            nextlin = 9
+            nextcol = 9
+        elif col == 8:
+            nextlin = lin + 1
+            nextcol = 0
+        else:
+            nextlin = lin
+            nextcol = col + 1
 
-                            # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
-                            if self.tries % 20000 == 0:
-                                logdebug("SUDOKU SOLVER", "# of tries = "+str(self.tries), False)
-                                if self.tries % 100000 == 0:
-                                    self.print_sudoku_grid()
+        if self.sudoku_grid[lin][col] == 0:
+            for num in range(1, 10):
+                if self.check_if_number_works_at_position(num, lin, col):
+                    self.tries += 1
+                    self.sudoku_grid[lin][col] = num
 
-                            if self.solve_sudoku(iteration_level+1):
-                                # stop sudoku solving because an inner recursion has found a solution
-                                return True
-                            else:
-                                self.sudoku_grid[i][j] = 0
+                    # check if this number solved sudoku
+                    if self.count_numbers_in_sudoku_grid() == 81:
+                        # sudoku is resolved (hopefully!), print it and get out
+                        return True
 
-                        else:
-                            # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
-                            self.sudoku_grid[i][j] = 0
-                            if t == 9:
-                                return False
+                    # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
+                    if self.tries % 20000 == 0:
+                        logdebug("SUDOKU SOLVER", "# of tries = "+str(self.tries), False)
+                        if self.tries % 100000 == 0:
+                            self.print_sudoku_grid()
 
-        # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
-        # tell previous recursion that current has failed and it must move to next number
-        # return False
+                    if self.solve_sudoku(iteration_level+1, nextlin, nextcol):
+                        # stop sudoku solving because an inner recursion has found a solution
+                        return True
+                    else:
+                        self.sudoku_grid[lin][col] = 0
+
+                # else:
+                    # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
+                    # if num == 9:
+            # if FOR loop reached end and haven't found a solution, goes back in the recursion
+            # self.sudoku_grid[lin][col] = 0
+            return False
+
+        else:
+            if self.solve_sudoku(iteration_level+1, nextlin, nextcol):
+                # stop sudoku solving because an inner recursion has found a solution
+                return True
+            else:
+                return False

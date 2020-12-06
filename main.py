@@ -72,6 +72,6 @@ logdebug("MAIN", "Amount numbers found in sudoku = " + str(c), False)
 
 if c < 81:
     logdebug("MAIN", "Starting to solve Sudoku!", False)
-    ss.solve_sudoku(1)
+    ss.solve_sudoku(1, 0, 0)
 
 print("Sudoku solver has finished!")

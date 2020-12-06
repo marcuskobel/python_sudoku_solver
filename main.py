@@ -35,4 +35,5 @@ else:
     print("INVALID! Can't continue solving sudoku.")
     exit()
 
+ss.print_sudoku_grid(sudoku_grid)
 # ss.solve_sudoku(sudoku_grid, 1)

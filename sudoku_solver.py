@@ -7,30 +7,30 @@ class Sudoku_Solver:
 
 
     def is_sudoku_valid(self, sudoku_grid):
+        logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
         for n in range(1, 10):
-            # print('for 1')
             for i in range(0, 9):
                 nfound = False
-                # print('checking number = ' +str(n)+ ' at position ' +str(i)+ ',' +str(j)+ ' = ' + str(sudoku_grid[i][j]))
-                if n in sudoku_grid[i]:
-                    if nfound:
-                        # print('found issue!!')
-                        return False
-                    else:
-                        nfound = True
-
-            # print('for 2')
-            for j in range(0, 9):
-                nfound = False
-                for i in range(0, 9):
-                    # print('checking number = ' +str(n)+ ' at position ' +str(i)+ ',' +str(j)+ ' = ' + str(sudoku_grid[i][j]))
-                    if sudoku_grid[i][j] == n:
+                for j in range(0, 9):
+                    logdebug("SUDOKU SOLVER", "checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
+                    if n in sudoku_grid[i]:
                         if nfound:
-                            # print('found issue!!')
+                            logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
                             return False
                         else:
                             nfound = True
-        # print('True')
+
+            logdebug("SUDOKU SOLVER", "Starting vertical check...", False)
+            for i in range(0, 9):
+                nfound = False
+                for j in range(0, 9):
+                    logdebug("SUDOKU SOLVER", "checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
+                    if sudoku_grid[j][i] == n:
+                        if nfound:
+                            logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
+                            return False
+                        else:
+                            nfound = True
         return True
 
 

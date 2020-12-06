@@ -40,6 +40,7 @@ sudoku_grid = [
 #     [2, 1, 8, 0, 0, 0, 0, 0, 7]]
 
 
+# MAIN CODE STARTS HERE
 print("Welcome to solve Sudoku! Starting up!")
 
 logdebug("MAIN", "Instanciating Sudoku_Solver class...", False)

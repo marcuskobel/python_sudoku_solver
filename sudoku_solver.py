@@ -2,7 +2,7 @@ from common import *
 
 class Sudoku_Solver:
     def __init__(self, sudoku_grid):
-        logdebug("SUDOKU_SOLVER", "Storing sudoki grid", False)
+        logdebug("SUDOKU_SOLVER", "Storing sudoku grid", False)
         self.sudoku_grid = sudoku_grid
 
 
@@ -65,8 +65,8 @@ class Sudoku_Solver:
     def solve_sudoku(self, iteration_level):
         for i in range(0, 9):
             for j in range(0, 9):
-                for t in range(1, 10):
-                    if self.sudoku_grid[i][j] == 0:
+                if self.sudoku_grid[i][j] == 0:
+                    for t in range(1, 10):
                         self.sudoku_grid[i][j] = t
                         if self.is_sudoku_valid():
                             if self.is_sudoku_completed():
@@ -75,16 +75,16 @@ class Sudoku_Solver:
                                 self.print_sudoku_grid()
                                 return True
 
-                            logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
-                            il = iteration_level+1
-                            if self.solve_sudoku(il):
+                            # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - assigning "+str(t)+" at position "+str(i)+","+str(j) + " and restarting recursion", False)
+                            # il = iteration_level+1
+                            if self.solve_sudoku(iteration_level+1):
                                 # stop sudoku solving because an inner recursion has found a solution
                                 return True
 
                         else:
-                            logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
+                            # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
                             self.sudoku_grid[i][j] = 0
 
-        logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!")
+        # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
         # tell previous recursion that current has failed
         return False

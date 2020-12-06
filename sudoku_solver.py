@@ -67,14 +67,27 @@ class Sudoku_Solver:
         return True
 
 
+    def check_if_number_works_at_position(self, number, line, column):
+        # check if number is duplicated in both line and column
+        for i in range(0, 9):
+            # check for number duplication in line
+            if self.sudoku_grid[line][i] == number:
+                return False
+            # check for number duplication in column
+            if self.sudoku_grid[i][column] == number:
+                return False
+        return True
+
+
     def solve_sudoku(self, iteration_level):
         # main function that tries to solve sudoku
         for i in range(0, 9):
             for j in range(0, 9):
                 if self.sudoku_grid[i][j] == 0:
                     for t in range(1, 10):
-                        self.sudoku_grid[i][j] = t
-                        if self.is_sudoku_valid():
+                        if self.check_if_number_works_at_position(t, i, j):
+                            self.sudoku_grid[i][j] = t
+                            # check if this number solved sudoku
                             if self.is_sudoku_completed():
                                 # sudoku is resolved (hopefully!), print it and get out
                                 logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" SODUKU SOLUTION FOUND!", False)
@@ -89,10 +102,12 @@ class Sudoku_Solver:
                             if self.solve_sudoku(iteration_level+1):
                                 # stop sudoku solving because an inner recursion has found a solution
                                 return True
+                            else:
+                                self.sudoku_grid[i][j] = 0
 
-                        else:
+                        # else:
                             # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - possiility "+str(t)+" didnt work at position " + str(i) + "," + str(j), False)
-                            self.sudoku_grid[i][j] = 0
+                            # self.sudoku_grid[i][j] = 0
 
         # logdebug("SUDOKU SOLVER", "LVL"+str(iteration_level)+" - NO POSSIBILITY WORKED, BACKING OFF ON RECURSION!!", False)
         # tell previous recursion that current has failed and it must move to next number

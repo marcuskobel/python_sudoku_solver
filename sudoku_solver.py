@@ -7,13 +7,13 @@ class Sudoku_Solver:
 
 
     def is_sudoku_valid(self, sudoku_grid):
-        logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
+        # logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
         for n in range(1, 10):
             for i in range(0, 9):
                 nfoundhori = False
                 nfoundvert = False
                 for j in range(0, 9):
-                    logdebug("SUDOKU SOLVER", "Horizontally checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
+                    # logdebug("SUDOKU SOLVER", "Horizontally checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
                     if sudoku_grid[i][j] == n:
                         if nfoundhori:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
@@ -21,7 +21,7 @@ class Sudoku_Solver:
                         else:
                             nfoundhori = True
 
-                    logdebug("SUDOKU SOLVER", "Vertically checking number = "+str(n)+" at position "+str(j)+","+str(i)+" = "+str(sudoku_grid[j][i]), False)
+                    # logdebug("SUDOKU SOLVER", "Vertically checking number = "+str(n)+" at position "+str(j)+","+str(i)+" = "+str(sudoku_grid[j][i]), False)
                     if sudoku_grid[j][i] == n:
                         if nfoundvert:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)

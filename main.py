@@ -1,12 +1,19 @@
 from sudoku_solver import *
 from common import *
+from sys import exit
 
 
 # random sudoku
 sudoku_grid = [
-    [2, 0, 0, 5, 0, 7, 0, 0, 0], [0, 0, 6, 2, 3, 0, 1, 0, 0], [7, 5, 3, 6, 0, 0, 0, 4, 8],
-    [0, 0, 0, 8, 0, 0, 4, 5, 1], [3, 0, 0, 0, 6, 0, 9, 0, 2], [0, 8, 5, 0, 2, 0, 0, 3, 0],
-    [5, 0, 1, 0, 0, 9, 6, 0, 0], [0, 4, 9, 7, 0, 0, 0, 0, 3], [8, 2, 7, 0, 0, 6, 0, 9, 0]]
+    [2, 0, 0, 5, 0, 7, 0, 0, 0], 
+    [0, 0, 6, 2, 3, 0, 1, 0, 0], 
+    [7, 5, 3, 6, 0, 0, 0, 4, 8],
+    [0, 0, 0, 8, 0, 0, 4, 5, 1], 
+    [3, 0, 0, 0, 6, 0, 9, 0, 2], 
+    [0, 8, 5, 0, 2, 0, 0, 3, 0],
+    [5, 0, 1, 0, 0, 9, 6, 0, 0], 
+    [0, 4, 9, 7, 0, 0, 0, 0, 3], 
+    [8, 2, 7, 6, 0, 6, 0, 9, 0]]
 
 # easy sudoku
 # sudoku_grid = [
@@ -33,7 +40,7 @@ if ss.is_sudoku_valid(sudoku_grid):
     ss.analyze_sudoku(sudoku_grid)
 else:
     print("INVALID! Can't continue solving sudoku.")
-    exit()
+    exit(0)
 
 ss.print_sudoku_grid(sudoku_grid)
 # ss.solve_sudoku(sudoku_grid, 1)

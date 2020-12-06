@@ -6,7 +6,7 @@ class Sudoku_Solver:
         self.sudoku_grid = sudoku_grid
 
 
-    def is_sudoku_valid(self, sudoku_grid):
+    def is_sudoku_valid(self):
         # logdebug("SUDOKU SOLVER", "Starting horizontal check...", False)
         for n in range(1, 10):
             for i in range(0, 9):
@@ -14,7 +14,7 @@ class Sudoku_Solver:
                 nfoundvert = False
                 for j in range(0, 9):
                     # logdebug("SUDOKU SOLVER", "Horizontally checking number = "+str(n)+" at position "+str(i)+","+str(j)+" = "+str(sudoku_grid[i][j]), False)
-                    if sudoku_grid[i][j] == n:
+                    if self.sudoku_grid[i][j] == n:
                         if nfoundhori:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
                             return False
@@ -22,7 +22,7 @@ class Sudoku_Solver:
                             nfoundhori = True
 
                     # logdebug("SUDOKU SOLVER", "Vertically checking number = "+str(n)+" at position "+str(j)+","+str(i)+" = "+str(sudoku_grid[j][i]), False)
-                    if sudoku_grid[j][i] == n:
+                    if self.sudoku_grid[j][i] == n:
                         if nfoundvert:
                             logdebug("SUDOKU SOLVER", "Issue found!! Sudoku is invalid.", False)
                             return False
@@ -32,11 +32,11 @@ class Sudoku_Solver:
         return True
 
 
-    def analyze_sudoku(self, sudoku_grid):
+    def analyze_sudoku(self):
         count = 0
         for i in range(0, 9):
             for j in range(0, 9):
-                if sudoku_grid[i][j] > 0:
+                if self.sudoku_grid[i][j] > 0:
                     count += 1
         logdebug("SUDOKU SOLVER", "Initial numbers found in sudoku = " + str(count), False)
 
@@ -78,7 +78,7 @@ class Sudoku_Solver:
     #     return False
 
 
-    def print_sudoku_grid(self, my_sudoku_grid):
+    def print_sudoku_grid(self):
         logdebug("SUDOKU SOLVER", "Printing sudoku grid...", False)
         for i in range(0, 9):
             if (i == 3 or i == 6):
@@ -86,5 +86,5 @@ class Sudoku_Solver:
             for j in range(0, 9):
                 if (j == 3 or j == 6):
                     print(' ', end='')
-                print(' %s' % my_sudoku_grid[i][j], end='')
+                print(' %s' % self.sudoku_grid[i][j], end='')
             print('')

@@ -65,13 +65,20 @@ class Sudoku_Solver:
             # check for number duplication in column
             if self.sudoku_grid[i][column] == number:
                 return False
+
+        # check for number duplication in the same 3x3 square
+        for i in range( (line//3)*3, ((line//3)*3)+3 ):
+            for j in range( (column//3)*3, ((column//3)*3)+3 ):
+                if self.sudoku_grid[i][j] == number:
+                    return False
+
         return True
 
 
     def solve_sudoku(self, iteration_level, lin, col):
         # main function that tries to solve sudoku
 
-        # calculate next lin/col that will
+        # calculate next lin/col that will de resolved upfront
         if col == 8:
             nextlin = lin + 1
             nextcol = 0
